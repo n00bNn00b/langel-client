@@ -1,9 +1,38 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../../firebase.init";
 
 const NavBar = () => {
+  const [user, loading] = useAuthState(auth);
+
+  const navItems = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/about">About Us</Link>
+      </li>
+      <li>
+        <Link to="/">Products</Link>
+      </li>
+      <li>
+        <Link to="/">Reviews</Link>
+      </li>
+      <li>
+        <Link to="/">My Profile</Link>
+      </li>
+      <li>
+        <Link to="/">Dashboard</Link>
+      </li>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
+    </>
+  );
   return (
-    <div className="navbar bg-neutral">
+    <div className="navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -26,25 +55,15 @@ const NavBar = () => {
             tabIndex="0"
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li tabIndex="0">
-              <Link to="/about" className="justify-between">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/tools">Tools</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
+            {navItems}
           </ul>
         </div>
         <Link to="/home" className="btn btn-ghost normal-case text-xl">
-          Langel
+          Langel & Co.
         </Link>
+      </div>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal p-0">{navItems}</ul>
       </div>
     </div>
   );

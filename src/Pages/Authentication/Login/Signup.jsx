@@ -1,16 +1,25 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const Signup = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const {
     register,
+    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({ mode: "all" });
 
-  const loginHandler = (e) => {
+  const signUpHandler = (e) => {
     console.log(e);
+
+    // createUserWithEmailAndPassword(e.email, e.password);
   };
+  // password match
+  const password = watch("password");
   return (
     <div className="form-control d-flex justify-center items-center mt-20">
       <div className="card w-96 bg-base-100 shadow-2xl image-full">
@@ -21,14 +30,61 @@ const Signup = () => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="text-center font-bold text-3xl">Login</h2>
-          <form onSubmit={handleSubmit(loginHandler)}>
+          <h2 className="text-center text-secondary font-bold text-3xl">
+            Sign Up
+          </h2>
+          <form onSubmit={handleSubmit(signUpHandler)}>
             <label className="label">
-              <span className="label-text font-bold">Email Address</span>
+              <span className="label-text text-secondary font-bold">
+                Full Name
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="i.e.: John Doe"
+              className="input input-bordered w-full max-w-xs"
+              {...register("name", {
+                required: {
+                  value: true,
+                  message: "Name Required",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Minimum 6 characters and maximum 40 characters",
+                },
+                pattern: {
+                  value: /(?=^.{0,40}$)^[a-zA-Z-]+\s[a-zA-Z-]+$/,
+                  message:
+                    "Required Valid Name with maximum 40 characters and one space",
+                },
+              })}
+            />
+            <label className="label">
+              {errors.name?.type === "required" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.name.message}{" "}
+                </span>
+              )}
+              {errors.name?.type === "pattern" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.name.message}{" "}
+                </span>
+              )}
+              {errors.name?.type === "minLength" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.name.message}{" "}
+                </span>
+              )}
+            </label>
+            {/* email */}
+            <label className="label">
+              <span className="label-text text-secondary font-bold">
+                Email Address
+              </span>
             </label>
             <input
               type="email"
-              placeholder="i.e: someone@example.com"
+              placeholder="i.e.: someone@example.com"
               className="input input-bordered w-full max-w-xs"
               {...register("email", {
                 required: {
@@ -53,8 +109,11 @@ const Signup = () => {
                 </span>
               )}
             </label>
+            {/* password */}
             <label className="label">
-              <span className="label-text font-bold">Password</span>
+              <span className="label-text text-secondary font-bold">
+                Password
+              </span>
             </label>
             <input
               type="password"
@@ -68,7 +127,7 @@ const Signup = () => {
                 pattern: {
                   value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                   message:
-                    "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
+                    "Must contain at least one number, one uppercase , one lowercase letter and at least 8 or more characters",
                 },
               })}
             />
@@ -84,11 +143,42 @@ const Signup = () => {
                 </span>
               )}
             </label>
+            {/* confirm password */}
+            <label className="label">
+              <span className="label-text text-secondary font-bold">
+                Confirm Password
+              </span>
+            </label>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="input input-bordered w-full max-w-xs"
+              {...register("confirmPassword", {
+                required: {
+                  value: true,
+                  message: "Password required",
+                },
+                validate: (value) =>
+                  value === password || "Password Does not match",
+              })}
+            />
+            <label className="label">
+              {errors.confirmPassword?.type === "required" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.confirmPassword.message}{" "}
+                </span>
+              )}
+              {errors.confirmPassword?.type === "validate" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.confirmPassword.message}{" "}
+                </span>
+              )}
+            </label>
 
             <input
               className="flex mx-auto mt-3 btn btn-neutral hover:btn-secondary hover:text-white"
               type="submit"
-              value="Login"
+              value="Sign up"
             />
           </form>
         </div>

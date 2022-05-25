@@ -13,7 +13,7 @@ const Login = () => {
   };
   return (
     <div className="form-control d-flex justify-center items-center mt-20">
-      <div className="card w-96 bg-base-100 shadow-2xl image-full">
+      <div className="card w-96 bg-base-100 shadow-2xl  image-full">
         <figure>
           <img
             src="https://i.ibb.co/GWjhvrX/lagel-logo.png?w=400&h=225"
@@ -21,10 +21,14 @@ const Login = () => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="text-center font-bold text-3xl">Login</h2>
+          <h2 className="text-center text-secondary font-bold text-3xl">
+            Login
+          </h2>
           <form onSubmit={handleSubmit(loginHandler)}>
             <label className="label">
-              <span className="label-text font-bold">Email Address</span>
+              <span className="label-text text-secondary font-bold">
+                Email Address
+              </span>
             </label>
             <input
               type="email"
@@ -54,7 +58,9 @@ const Login = () => {
               )}
             </label>
             <label className="label">
-              <span className="label-text font-bold">Password</span>
+              <span className="label-text text-secondary font-bold">
+                Password
+              </span>
             </label>
             <input
               type="password"
