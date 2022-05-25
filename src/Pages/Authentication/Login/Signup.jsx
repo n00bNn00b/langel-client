@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const Login = () => {
+const Signup = () => {
   const {
     register,
     formState: { errors },
@@ -48,7 +48,7 @@ const Login = () => {
                 </span>
               )}
               {errors.email?.type === "pattern" && (
-                <span className="label-text-alt text-red font-bold">
+                <span className="label-text-alt text-red-500 font-bold">
                   {errors.email.message}{" "}
                 </span>
               )}
@@ -86,7 +86,7 @@ const Login = () => {
             </label>
 
             <input
-              className="flex mx-auto btn btn-neutral hover:btn-secondary hover:text-white"
+              className="flex mx-auto mt-3 btn btn-neutral hover:btn-secondary hover:text-white"
               type="submit"
               value="Login"
             />
@@ -97,4 +97,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
