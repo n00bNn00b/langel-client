@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
+import Loading from "../../Global/Loading";
 
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+
   const navigate = useNavigate();
   const {
     register,
@@ -18,13 +23,18 @@ const Signup = () => {
     reset,
   } = useForm({ mode: "all" });
 
+  if (loading) {
+    return <Loading />;
+  }
+
   const signUpHandler = async (e) => {
     // console.log(e);
     if (e.password !== e.confirmPassword) {
       toast("password does not match!");
     } else {
       await createUserWithEmailAndPassword(e.email, e.password);
-      toast.success("Signup Successful!");
+
+      toast.success("Signup Successful! Please Login to Continue...");
       reset();
       navigate("/login");
     }
