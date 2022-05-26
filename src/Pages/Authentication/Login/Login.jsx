@@ -1,15 +1,36 @@
 import React from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import auth from "../../../firebase.init";
+import Loading from "../../Global/Loading";
+import Social from "../Social";
 
 const Login = () => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const loginHandler = (e) => {
-    console.log(e);
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    toast.error("Something gone wrong! Please try again.");
+  }
+  if (user) {
+    navigate("/");
+  }
+
+  const loginHandler = async (e) => {
+    // console.log(e);
+    await signInWithEmailAndPassword(e.email, e.password);
   };
   return (
     <div className="form-control d-flex justify-center items-center mt-20">
@@ -90,13 +111,19 @@ const Login = () => {
                 </span>
               )}
             </label>
+            <label className="label">
+              <span className="label-text text-secondary font-bold">
+                New to Langel? <Link to="/signup">Signup</Link>
+              </span>
+            </label>
 
             <input
-              className="flex mx-auto btn btn-neutral hover:btn-secondary hover:text-white"
+              className="flex my-5 mx-auto btn btn-neutral hover:btn-secondary hover:text-white"
               type="submit"
               value="Login"
             />
           </form>
+          <Social />
         </div>
       </div>
     </div>

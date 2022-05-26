@@ -2,26 +2,38 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
 
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
   const {
     register,
     watch,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({ mode: "all" });
 
-  const signUpHandler = (e) => {
-    console.log(e);
-
-    // createUserWithEmailAndPassword(e.email, e.password);
+  const signUpHandler = async (e) => {
+    // console.log(e);
+    if (e.password !== e.confirmPassword) {
+      toast("password does not match!");
+    } else {
+      await createUserWithEmailAndPassword(e.email, e.password);
+      toast.success("Signup Successful!");
+      reset();
+      navigate("/login");
+    }
+    await signOut(auth);
   };
   // password match
   const password = watch("password");
   return (
-    <div className="form-control d-flex justify-center items-center mt-20">
+    <div className="form-control d-flex justify-center items-center my-20">
       <div className="card w-96 bg-base-100 shadow-2xl image-full">
         <figure>
           <img
@@ -156,7 +168,7 @@ const Signup = () => {
               {...register("confirmPassword", {
                 required: {
                   value: true,
-                  message: "Password required",
+                  message: "Password Confirm required",
                 },
                 validate: (value) =>
                   value === password || "Password Does not match",
@@ -173,6 +185,11 @@ const Signup = () => {
                   {errors.confirmPassword.message}{" "}
                 </span>
               )}
+            </label>
+            <label className="label">
+              <span className="label-text text-secondary font-bold">
+                Already have an account? <Link to="/login">Login</Link>
+              </span>
             </label>
 
             <input
