@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useAuthState, useUpdateProfile } from "react-firebase-hooks/auth";
+import { useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loading from "../Global/Loading";
 
 const UpdateProfile = () => {
-  const [updateProfile, updating, errorProfile] = useUpdateProfile(auth);
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
 
   const {
     register,
@@ -17,18 +18,22 @@ const UpdateProfile = () => {
   if (updating) {
     return <Loading />;
   }
+  if (error) {
+    toast.error("Something gone Wrong! Please Try again later.");
+  }
   const profileHandler = async (e) => {
     await updateProfile({ displayName: e.name });
+    reset();
   };
   return (
     <div className="card flex mx-auto my-20 w-96 bg-base-100 shadow-2xl">
       <div className="card-body">
-        <h2 className="card-title">Update Profile</h2>
+        <h2 className="card-title flex mx-auto">Update Profile</h2>
         {/* profile input */}
         <form onSubmit={handleSubmit(profileHandler)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="label-text">Full Name</span>
+              <span className="label-text font-bold">Full Name</span>
             </label>
             <input
               type="text"
@@ -50,11 +55,132 @@ const UpdateProfile = () => {
                 },
               })}
             />
+            <label className="label">
+              {errors.name?.type === "required" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.name.message}{" "}
+                </span>
+              )}
+              {errors.name?.type === "pattern" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.name.message}{" "}
+                </span>
+              )}
+              {errors.name?.type === "minLength" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.name.message}{" "}
+                </span>
+              )}
+            </label>
+          </div>
+          {/* Image */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text font-bold">
+                Profile Picture(URL){" "}
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="i.e: https://example.com/profilpic.png"
+              className="input input-bordered w-full max-w-xs"
+              {...register("url", {
+                required: {
+                  value: true,
+                  message: "URL Required",
+                },
+                pattern: {
+                  value:
+                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
+                  message: "Valid URL Required",
+                },
+              })}
+            />
+            <label className="label">
+              {errors.url?.type === "required" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.url.message}{" "}
+                </span>
+              )}
+              {errors.url?.type === "pattern" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.url.message}{" "}
+                </span>
+              )}
+            </label>
+          </div>
+          {/* LinkedIn */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text font-bold">LinkedIn</span>
+            </label>
+            <input
+              type="text"
+              placeholder="i.e: John Danver"
+              className="input input-bordered w-full max-w-xs"
+              {...register("linkedIn", {
+                required: {
+                  value: true,
+                  message: "LinkedIn URL Required",
+                },
+                pattern: {
+                  value:
+                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
+                  message: "Valid LinkedIn URL Required",
+                },
+              })}
+            />
+            <label className="label">
+              {errors.linkedIn?.type === "required" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.linkedIn.message}{" "}
+                </span>
+              )}
+              {errors.linkedIn?.type === "pattern" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.linkedIn.message}{" "}
+                </span>
+              )}
+            </label>
+          </div>
+          {/* GitHub */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text font-bold">GitHub</span>
+            </label>
+            <input
+              type="text"
+              placeholder="i.e: John Danver"
+              className="input input-bordered w-full max-w-xs"
+              {...register("gitHub", {
+                required: {
+                  value: true,
+                  message: "GitHub Profile Link Required",
+                },
+                pattern: {
+                  value:
+                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
+                  message: "Valid GitHub URL Required",
+                },
+              })}
+            />
+            <label className="label">
+              {errors.gitHub?.type === "required" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.gitHub.message}{" "}
+                </span>
+              )}
+              {errors.gitHub?.type === "pattern" && (
+                <span className="label-text-alt text-red-500 font-bold">
+                  {errors.gitHub.message}{" "}
+                </span>
+              )}
+            </label>
           </div>
 
           {/* profile input end */}
           <div className="card-actions justify-end">
-            <button className="my-3 flex mx-auto btn btn-primary hover:btn-secondary hover:text-white">
+            <button className="my-3 flex mx-auto text-white btn btn-secondary hover:btn-primary ">
               Update
             </button>
           </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../Global/Loading";
 
@@ -16,10 +17,25 @@ const Profile = () => {
         <img src={user?.photoURL ? user.photoURL : userImg} alt="Album" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">User Profile</h2>
+        <h2 className="card-title">My Profile</h2>
         <p>
-          Name:{user?.displayName ? user?.displayName : " Name not updated yet"}{" "}
+          <span className="font-bold">Name:</span>{" "}
+          {user?.displayName ? user?.displayName : " Name not updated yet"}{" "}
         </p>
+        <p>
+          <span className="font-bold">Email:</span> {user?.email}{" "}
+        </p>
+        <p>
+          <span className="font-bold">GitHub:</span>{" "}
+          {user?.displayName ? user?.displayName : " Name not updated yet"}{" "}
+        </p>
+        <p>
+          <span className="font-bold">LinkedIn:</span>{" "}
+          {user?.displayName ? user?.displayName : " Name not updated yet"}{" "}
+        </p>
+        <Link to="/updateProfile" className="btn">
+          Edit Profile
+        </Link>
       </div>
     </div>
   );

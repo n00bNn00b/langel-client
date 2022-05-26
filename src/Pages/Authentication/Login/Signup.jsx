@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
@@ -14,6 +15,8 @@ const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, errorProfile] = useUpdateProfile(auth);
+  const [sendEmailVerification, sending, errorVerification] =
+    useSendEmailVerification(auth);
 
   const navigate = useNavigate();
 
@@ -36,8 +39,9 @@ const Signup = () => {
     }
     await createUserWithEmailAndPassword(e.email, e.password);
     await updateProfile({ displayName: e.name });
+    await sendEmailVerification();
     signOut(auth);
-    toast.success("Signup Successful! Please Login to Continue...");
+    toast.success("Signup Successful! Please Confirm Email.");
     reset();
     navigate("/login");
   };
