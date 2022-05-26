@@ -187,8 +187,11 @@ const Signup = () => {
               )}
             </label>
             <label className="label">
-              <span className="label-text text-secondary font-bold">
-                Already have an account? <Link to="/login">Login</Link>
+              <span className="label-text text-lg text-secondary font-bold">
+                Already have an account?{" "}
+                <Link className="underline underline-offset-1" to="/login">
+                  Login
+                </Link>
               </span>
             </label>
 

@@ -1,10 +1,14 @@
 import React from "react";
 import Footer from "../Global/Footer/Footer";
+import Summary from "./Summary";
 
 const Home = () => {
   return (
     <div>
-      <h2>Home</h2>
+      <div className="m-5">
+        <h2>Home</h2>
+        <Summary />
+      </div>
       <Footer />
     </div>
   );

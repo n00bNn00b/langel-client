@@ -33,7 +33,7 @@ const Login = () => {
     await signInWithEmailAndPassword(e.email, e.password);
   };
   return (
-    <div className="form-control d-flex justify-center items-center mt-20">
+    <div className="form-control d-flex justify-center items-center my-20">
       <div className="card w-96 bg-base-100 shadow-2xl  image-full">
         <figure>
           <img
@@ -95,7 +95,7 @@ const Login = () => {
                 pattern: {
                   value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
                   message:
-                    "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters",
+                    "Must contain at least one number, one uppercase, one lowercase letter, and at least 8 or more characters",
                 },
               })}
             />
@@ -118,7 +118,7 @@ const Login = () => {
             </label>
 
             <input
-              className="flex my-5 mx-auto btn btn-neutral hover:btn-secondary hover:text-white"
+              className="flex my-5 mx-auto text-white btn btn-secondary hover:btn-primary "
               type="submit"
               value="Login"
             />
