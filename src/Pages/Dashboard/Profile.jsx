@@ -1,13 +1,17 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import Loading from "../Global/Loading";
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
-  console.log(user);
+  //   console.log(user);
+  if (loading) {
+    return <Loading />;
+  }
   const userImg = "https://avatars.githubusercontent.com/u/10570920?v=4";
   return (
-    <div className="card mx-10 my-20 lg:card-side bg-base-100 shadow-2xl">
+    <div className="card w-96 flex  mx-auto my-20 bg-base-100 shadow-2xl">
       <figure>
         <img src={user?.photoURL ? user.photoURL : userImg} alt="Album" />
       </figure>

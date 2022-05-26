@@ -6,7 +6,6 @@ import Loading from "../Global/Loading";
 
 const UpdateProfile = () => {
   const [updateProfile, updating, errorProfile] = useUpdateProfile(auth);
-  const [displayName, setDisplayName] = useState("");
 
   const {
     register,
@@ -19,8 +18,7 @@ const UpdateProfile = () => {
     return <Loading />;
   }
   const profileHandler = async (e) => {
-    // const name = e.name;
-    // console.log(displayName);
+    await updateProfile({ displayName: e.name });
   };
   return (
     <div className="card flex mx-auto my-20 w-96 bg-base-100 shadow-2xl">

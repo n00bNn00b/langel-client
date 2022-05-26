@@ -113,7 +113,10 @@ const Login = () => {
             </label>
             <label className="label">
               <span className="label-text text-secondary font-bold">
-                New to Langel? <Link to="/signup">Signup</Link>
+                New to Langel?{" "}
+                <Link className="text-primary" to="/signup">
+                  Signup
+                </Link>
               </span>
             </label>
 

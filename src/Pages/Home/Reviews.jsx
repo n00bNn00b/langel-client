@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 const Reviews = () => {
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
+  const [rating, setRating] = useState(0);
+  //   console.log(rating);
 
   return (
-    <div className="rating rating-md flex justify-center my-5">
+    <div className="rating rating-md flex justify-center my-20">
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
 

@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../Global/Footer/Footer";
+import Loading from "../Global/Loading";
+import Banner from "./Banner";
+import Products from "./Products";
 import Reviews from "./Reviews";
 import Summary from "./Summary";
 
 const Home = () => {
+  const [loading, SetLoading] = useState(false);
+  useEffect(() => {
+    SetLoading(true);
+    setTimeout(() => {
+      SetLoading(false);
+    }, 3000);
+  }, []);
   return (
     <div>
-      <div className="m-5">
-        <h2>Home</h2>
+      <div className="m-10">
+        <Banner />
         <Summary />
+        {loading ? <Loading loading={loading} /> : <Products />}
         <Reviews />
       </div>
       <Footer />

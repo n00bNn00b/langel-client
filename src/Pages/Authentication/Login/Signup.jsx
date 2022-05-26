@@ -13,8 +13,10 @@ import Loading from "../../Global/Loading";
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, errorProfile] = useUpdateProfile(auth);
 
   const navigate = useNavigate();
+
   const {
     register,
     watch,
@@ -23,7 +25,7 @@ const Signup = () => {
     reset,
   } = useForm({ mode: "all" });
 
-  if (loading) {
+  if (loading || updating) {
     return <Loading />;
   }
 
@@ -31,14 +33,13 @@ const Signup = () => {
     // console.log(e);
     if (e.password !== e.confirmPassword) {
       toast("password does not match!");
-    } else {
-      await createUserWithEmailAndPassword(e.email, e.password);
-
-      toast.success("Signup Successful! Please Login to Continue...");
-      reset();
-      navigate("/login");
     }
-    await signOut(auth);
+    await createUserWithEmailAndPassword(e.email, e.password);
+    await updateProfile({ displayName: e.name });
+    signOut(auth);
+    toast.success("Signup Successful! Please Login to Continue...");
+    reset();
+    navigate("/login");
   };
   // password match
   const password = watch("password");
