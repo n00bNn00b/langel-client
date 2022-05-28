@@ -14,6 +14,7 @@ import Checkout from "./Pages/Order/Checkout";
 import RequireAuth from "./Pages/Authentication/RequireAuth";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyOrders from "./Pages/Dashboard/MyOrders";
+import Users from "./Pages/Dashboard/Users";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="/users" element={<Users />} />
       </Routes>
       <ToastContainer />
     </div>
