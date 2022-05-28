@@ -1,28 +1,28 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Review from "./Review";
 
 const Reviews = () => {
-  const [rating, setRating] = useState(0);
+  const [ratings, setRatings] = useState([]);
   //   console.log(rating);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/reviews")
+      .then((res) => setRatings(res.data));
+  }, []);
+  // console.log(ratings);
 
   return (
-    <div className="rating rating-md flex justify-center my-20">
-      {[...Array(5)].map((star, i) => {
-        const ratingValue = i + 1;
-
-        return (
-          <input
-            key={i}
-            type="radio"
-            name="rating-7"
-            className={
-              ratingValue <= rating
-                ? "mask mask-star-2 bg-orange-400"
-                : "mask mask-star-2 bg-gray-300"
-            }
-            onClick={() => setRating(ratingValue)}
-          />
-        );
-      })}
+    <div className="my-20">
+      <h2 className="font-bold text-center text-3xl">
+        {" "}
+        What Our Happy Clients Say
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+        {ratings.map((review) => (
+          <Review key={review._id} review={review} />
+        ))}
+      </div>
     </div>
   );
 };

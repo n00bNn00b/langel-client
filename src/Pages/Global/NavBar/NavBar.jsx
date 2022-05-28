@@ -20,17 +20,21 @@ const NavBar = () => {
         <Link to="/about">About Us</Link>
       </li>
       <li>
-        <Link to="/">Products</Link>
+        <Link to="/products">Products</Link>
       </li>
       <li>
         <Link to="/">Reviews</Link>
       </li>
-      <li>
-        <Link to="/profile">My Profile</Link>
-      </li>
-      <li>
-        <Link to="/">Dashboard</Link>
-      </li>
+      {user && (
+        <li>
+          <Link to="/profile">My Profile</Link>
+        </li>
+      )}
+      {user && (
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+      )}
       {user ? (
         <li>
           <button onClick={logout}>Logout</button>
