@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useUpdateProfile } from "react-firebase-hooks/auth";
+import React from "react";
+import { useAuthState, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
@@ -7,7 +7,7 @@ import Loading from "../Global/Loading";
 
 const UpdateProfile = () => {
   const [updateProfile, updating, error] = useUpdateProfile(auth);
-
+  const [user] = useAuthState(auth);
   const {
     register,
     formState: { errors },
@@ -21,7 +21,22 @@ const UpdateProfile = () => {
   if (error) {
     toast.error("Something gone Wrong! Please Try again later.");
   }
+
   const profileHandler = async (e) => {
+    const users = {
+      email: user?.email,
+      name: e.name,
+      linkedIn: e.linkedIn,
+      gitHub: e.gitHub,
+    };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    }).then((res) => res.json());
+
     await updateProfile({ displayName: e.name });
     reset();
   };
@@ -73,42 +88,7 @@ const UpdateProfile = () => {
               )}
             </label>
           </div>
-          {/* Image */}
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="label-text font-bold">
-                Profile Picture(URL){" "}
-              </span>
-            </label>
-            <input
-              type="text"
-              placeholder="i.e: https://example.com/profilpic.png"
-              className="input input-bordered w-full max-w-xs"
-              {...register("url", {
-                required: {
-                  value: true,
-                  message: "URL Required",
-                },
-                pattern: {
-                  value:
-                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
-                  message: "Valid URL Required",
-                },
-              })}
-            />
-            <label className="label">
-              {errors.url?.type === "required" && (
-                <span className="label-text-alt text-red-500 font-bold">
-                  {errors.url.message}{" "}
-                </span>
-              )}
-              {errors.url?.type === "pattern" && (
-                <span className="label-text-alt text-red-500 font-bold">
-                  {errors.url.message}{" "}
-                </span>
-              )}
-            </label>
-          </div>
+
           {/* LinkedIn */}
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -116,7 +96,7 @@ const UpdateProfile = () => {
             </label>
             <input
               type="text"
-              placeholder="i.e: John Danver"
+              placeholder="i.e: https://www.linkedin.com/in/johndanver/"
               className="input input-bordered w-full max-w-xs"
               {...register("linkedIn", {
                 required: {
@@ -150,7 +130,7 @@ const UpdateProfile = () => {
             </label>
             <input
               type="text"
-              placeholder="i.e: John Danver"
+              placeholder="i.e: https://www.github.com/johndanver"
               className="input input-bordered w-full max-w-xs"
               {...register("gitHub", {
                 required: {

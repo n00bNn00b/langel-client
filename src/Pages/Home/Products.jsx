@@ -12,7 +12,9 @@ const Products = () => {
   //   console.log(products);
   return (
     <div className="my-10">
-      <h2>Products </h2>
+      <h2 className="text-center font-bold text-3xl text-primary my-5">
+        Products We Supply{" "}
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {products.splice(0, 6).map((product) => (
           <Product key={product._id} product={product} />

@@ -11,6 +11,7 @@ import UpdateProfile from "./Pages/Dashboard/UpdateProfile";
 import AllProducts from "./Pages/Products/AllProducts";
 import Order from "./Pages/Order/Order";
 import Checkout from "./Pages/Order/Checkout";
+import RequireAuth from "./Pages/Authentication/RequireAuth";
 
 function App() {
   return (
@@ -22,11 +23,46 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<AllProducts />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/order/:id" element={<Order />} />
-        <Route path="/checkout/:id" element={<Checkout />} />
-        <Route path="/updateProfile" element={<UpdateProfile />} />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <RequireAuth>
+              <Order />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <RequireAuth>
+              <Order />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/checkout/:id"
+          element={
+            <RequireAuth>
+              <Checkout />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/updateProfile"
+          element={
+            <RequireAuth>
+              <UpdateProfile />
+            </RequireAuth>
+          }
+        />
       </Routes>
       <ToastContainer />
     </div>

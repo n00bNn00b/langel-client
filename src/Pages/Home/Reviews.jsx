@@ -14,7 +14,7 @@ const Reviews = () => {
 
   return (
     <div className="my-20">
-      <h2 className="font-bold text-center text-3xl">
+      <h2 className="font-bold text-center text-secondary text-3xl">
         {" "}
         What Our Happy Clients Say
       </h2>

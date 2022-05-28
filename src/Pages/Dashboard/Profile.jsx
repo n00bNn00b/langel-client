@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -6,6 +7,14 @@ import Loading from "../Global/Loading";
 
 const Profile = () => {
   const [user, loading] = useAuthState(auth);
+  const email = user?.email;
+  const [socialUser, setSocialUser] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/user/${email}`)
+      .then((res) => setSocialUser(res.data));
+  }, [email]);
+  console.log(socialUser);
   //   console.log(user);
   if (loading) {
     return <Loading />;
@@ -27,11 +36,13 @@ const Profile = () => {
         </p>
         <p>
           <span className="font-bold">GitHub:</span>{" "}
-          {user?.displayName ? user?.displayName : " Name not updated yet"}{" "}
+          {socialUser?.gitHub ? socialUser?.gitHub : " Name not updated yet"}{" "}
         </p>
         <p>
           <span className="font-bold">LinkedIn:</span>{" "}
-          {user?.displayName ? user?.displayName : " Name not updated yet"}{" "}
+          {socialUser?.linkedIn
+            ? socialUser?.linkedIn
+            : " Name not updated yet"}{" "}
         </p>
         <Link to="/updateProfile" className="btn">
           Edit Profile

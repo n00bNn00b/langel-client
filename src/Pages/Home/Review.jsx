@@ -11,7 +11,7 @@ const Review = ({ review }) => {
           <img src={image} alt="user" />
         </div>
       </div>
-      <p className="text-center pt-5">Rating: {rating} </p>
+      {/* <div className="text-center pt-5">Rating: {rating}</div> */}
       <div className="card-body">
         <p>"{description}"</p>
         <br /> <span className="font-bold text-right">~{name}</span>
