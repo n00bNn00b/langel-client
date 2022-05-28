@@ -12,6 +12,7 @@ const Products = () => {
   //   console.log(products);
   return (
     <div className="my-10">
+      <div className="divider h-1 bg-secondary"></div>
       <h2 className="text-center font-bold text-3xl text-primary my-5">
         Products We Supply{" "}
       </h2>

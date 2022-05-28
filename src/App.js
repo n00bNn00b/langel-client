@@ -15,6 +15,8 @@ import RequireAuth from "./Pages/Authentication/RequireAuth";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyOrders from "./Pages/Dashboard/MyOrders";
 import Users from "./Pages/Dashboard/Users";
+import RequireAdmin from "./Pages/Dashboard/RequireAdmin";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   return (
@@ -82,7 +84,15 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/users" element={<Users />} />
+        <Route
+          path="/users"
+          element={
+            <RequireAdmin>
+              <Users />
+            </RequireAdmin>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </div>

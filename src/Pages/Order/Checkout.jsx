@@ -36,6 +36,8 @@ const Checkout = () => {
       email: user?.email,
       order: data.minorder,
       address: data.address,
+      productName: product.name,
+      price: product.price,
     };
     if (data.minorder >= 100) {
       fetch("http://localhost:5000/order", {
