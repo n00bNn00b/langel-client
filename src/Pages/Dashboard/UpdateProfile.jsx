@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthState, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loading from "../Global/Loading";
@@ -8,6 +9,7 @@ import Loading from "../Global/Loading";
 const UpdateProfile = () => {
   const [updateProfile, updating, error] = useUpdateProfile(auth);
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -39,6 +41,8 @@ const UpdateProfile = () => {
 
     await updateProfile({ displayName: e.name });
     reset();
+    toast.success("Profile Updated SuccessFully");
+    navigate("/profile");
   };
   return (
     <div className="card flex mx-auto my-20 w-96 bg-base-100 shadow-2xl">
@@ -105,7 +109,7 @@ const UpdateProfile = () => {
                 },
                 pattern: {
                   value:
-                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
+                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
                   message: "Valid LinkedIn URL Required",
                 },
               })}
@@ -139,7 +143,7 @@ const UpdateProfile = () => {
                 },
                 pattern: {
                   value:
-                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
+                    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g,
                   message: "Valid GitHub URL Required",
                 },
               })}

@@ -18,7 +18,9 @@ const AllProducts = () => {
 
   return (
     <div className="m-10">
-      <h2>Products We Supply all over the World</h2>
+      <h2 className="text-center text-3xl font-bold text-secondary">
+        Products We Supply all over the World
+      </h2>
       {loading ? (
         <Loading loading={loading} />
       ) : (

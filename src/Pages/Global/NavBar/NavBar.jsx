@@ -32,6 +32,11 @@ const NavBar = () => {
       )}
       {user && (
         <li>
+          <Link to="/myorders">My Orders</Link>
+        </li>
+      )}
+      {user && (
+        <li>
           <Link to="/dashboard">Dashboard</Link>
         </li>
       )}

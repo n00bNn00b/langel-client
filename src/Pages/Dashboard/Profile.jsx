@@ -14,7 +14,7 @@ const Profile = () => {
       .get(`http://localhost:5000/user/${email}`)
       .then((res) => setSocialUser(res.data));
   }, [email]);
-  console.log(socialUser);
+  // console.log(socialUser);
   //   console.log(user);
   if (loading) {
     return <Loading />;

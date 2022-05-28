@@ -12,6 +12,8 @@ import AllProducts from "./Pages/Products/AllProducts";
 import Order from "./Pages/Order/Order";
 import Checkout from "./Pages/Order/Checkout";
 import RequireAuth from "./Pages/Authentication/RequireAuth";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import MyOrders from "./Pages/Dashboard/MyOrders";
 
 function App() {
   return (
@@ -60,6 +62,22 @@ function App() {
           element={
             <RequireAuth>
               <UpdateProfile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/myorders"
+          element={
+            <RequireAuth>
+              <MyOrders />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
             </RequireAuth>
           }
         />
