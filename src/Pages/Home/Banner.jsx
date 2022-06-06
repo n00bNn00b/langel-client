@@ -5,7 +5,8 @@ const Banner = () => {
     <div className="carousel w-full mt-20 border-r-2">
       <div id="slide1" className="carousel-item relative w-full">
         <img
-          src="https://api.lorem.space/image/car?w=800&h=200&hash=8B7BCDC2"
+          style={{ height: "600px" }}
+          src="https://c1.wallpaperflare.com/preview/313/315/582/ball-brass-butterfly-fittings.jpg"
           className="w-full"
           alt="banner"
         />{" "}
@@ -20,7 +21,8 @@ const Banner = () => {
       </div>
       <div id="slide2" className="carousel-item relative w-full">
         <img
-          src="https://api.lorem.space/image/car?w=800&h=200&hash=500B67FB"
+          style={{ height: "600px" }}
+          src="https://m.media-amazon.com/images/I/61iXCW1JA-L._AC_SL1500_.jpg"
           className="w-full"
           alt="banner"
         />{" "}
@@ -35,7 +37,8 @@ const Banner = () => {
       </div>
       <div id="slide3" className="carousel-item relative w-full">
         <img
-          src="https://api.lorem.space/image/car?w=800&h=200&hash=A89D0DE6"
+          style={{ height: "600px" }}
+          src="https://www.micronsteel.com/wp-content/uploads/image/forged-fittings/asme-b16-11-socket-weld-fittings.jpg"
           className="w-full"
           alt="banner"
         />{" "}

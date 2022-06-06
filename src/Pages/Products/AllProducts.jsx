@@ -8,7 +8,7 @@ const AllProducts = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/products")
+      .get("https://warm-castle-08464.herokuapp.com/products")
       .then((res) => setProducts(res.data));
     setLoading(true);
     setTimeout(() => {

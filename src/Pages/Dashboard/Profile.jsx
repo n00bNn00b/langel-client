@@ -11,7 +11,7 @@ const Profile = () => {
   const [socialUser, setSocialUser] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/${email}`)
+      .get(`https://warm-castle-08464.herokuapp.com/user/${email}`)
       .then((res) => setSocialUser(res.data));
   }, [email]);
   // console.log(socialUser);

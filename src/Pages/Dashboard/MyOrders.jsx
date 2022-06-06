@@ -11,7 +11,7 @@ const MyOrders = () => {
   const email = user?.email;
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/orders/${email}`)
+      .get(`https://warm-castle-08464.herokuapp.com/orders/${email}`)
       .then((res) => setMyOrders(res.data));
     setLoading(true);
     setTimeout(() => {
