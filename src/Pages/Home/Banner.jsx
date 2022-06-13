@@ -53,7 +53,8 @@ const Banner = () => {
       </div>
       <div id="slide4" className="carousel-item relative w-full">
         <img
-          src="https://api.lorem.space/image/car?w=800&h=200&hash=225E6693"
+          style={{ height: "600px" }}
+          src="https://m.media-amazon.com/images/I/61iXCW1JA-L._AC_SL1500_.jpg"
           className="w-full"
           alt="banner"
         />{" "}
