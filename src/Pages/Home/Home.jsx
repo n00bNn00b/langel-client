@@ -16,7 +16,7 @@ const Home = () => {
   }, []);
   return (
     <div>
-      <div className="m-10">
+      <div className="mt-10">
         <Banner />
         <Summary />
         {loading ? <Loading loading={loading} /> : <Products />}
