@@ -9,7 +9,7 @@ const Summary = () => {
       <h1 className="text-center my-5 text-4xl font-bold text-secondary">
         Thousands of Customers trust us
       </h1>
-      <div className="stats stats-vertical sm:stats-vertical md:stats-horizontal lg:stats-horizontal shadow-xl transform translate-all  lg:flex duration-300 w-screen">
+      <div className="stats stats-vertical sm:stats-vertical lg:stats-horizontal shadow transform  lg:flex flex mx-auto">
         <div className="stat bg-secondary text-white">
           <div className="stat-title font-bold text-lg">Years Served</div>
           <div className="stat-value">
