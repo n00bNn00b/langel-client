@@ -16,7 +16,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`https://warm-castle-08464.herokuapp.com/product/${id}`)
+      .get(`https://langel-server-production.up.railway.app/product/${id}`)
       .then((res) => setProduct(res.data));
     setLoading(false);
     setTimeout(() => {
@@ -40,7 +40,7 @@ const Checkout = () => {
       price: product.price,
     };
     if (data.minorder >= 100) {
-      fetch("https://warm-castle-08464.herokuapp.com/order", {
+      fetch("https://langel-server-production.up.railway.app/order", {
         method: "POST",
         headers: {
           "content-type": "application/json",

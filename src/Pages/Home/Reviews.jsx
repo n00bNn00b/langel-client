@@ -7,7 +7,7 @@ const Reviews = () => {
   //   console.log(rating);
   useEffect(() => {
     axios
-      .get("https://warm-castle-08464.herokuapp.com/reviews")
+      .get("https://langel-server-production.up.railway.app/reviews")
       .then((res) => setRatings(res.data));
   }, []);
   // console.log(ratings);

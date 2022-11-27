@@ -9,7 +9,7 @@ const Users = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("https://warm-castle-08464.herokuapp.com/users", {
+    fetch("https://langel-server-production.up.railway.app/users", {
       method: "GET",
       headers: {
         "content-type": "application/json",

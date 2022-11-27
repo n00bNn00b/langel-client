@@ -31,7 +31,7 @@ const UpdateProfile = () => {
       linkedIn: e.linkedIn,
       gitHub: e.gitHub,
     };
-    fetch("https://warm-castle-08464.herokuapp.com/users", {
+    fetch("https://langel-server-production.up.railway.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

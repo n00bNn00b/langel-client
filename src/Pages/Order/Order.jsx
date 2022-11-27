@@ -12,7 +12,7 @@ const Order = () => {
 
   useEffect(() => {
     axios
-      .get(`https://warm-castle-08464.herokuapp.com/product/${id}`)
+      .get(`https://langel-server-production.up.railway.app/product/${id}`)
       .then((res) => setProduct(res.data));
     setLoading(false);
     setTimeout(() => {

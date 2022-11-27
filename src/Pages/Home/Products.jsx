@@ -6,7 +6,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
-      .get("https://warm-castle-08464.herokuapp.com/products")
+      .get("https://langel-server-production.up.railway.app/products")
       .then((res) => setProducts(res.data));
   }, []);
   //   console.log(products);

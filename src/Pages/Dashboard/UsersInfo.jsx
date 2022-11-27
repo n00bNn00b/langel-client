@@ -4,12 +4,15 @@ import { toast } from "react-toastify";
 const UsersInfo = ({ user, refetch, index }) => {
   const { email, name, role } = user;
   const makeAdmin = () => {
-    fetch(`https://warm-castle-08464.herokuapp.com/user/admin/${email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
+    fetch(
+      `https://langel-server-production.up.railway.app/user/admin/${email}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
