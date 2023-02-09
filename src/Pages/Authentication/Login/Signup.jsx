@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import Loading from "../../Global/Loading";
+import axios from "axios";
 
 const Signup = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -28,11 +29,17 @@ const Signup = () => {
     reset,
   } = useForm({ mode: "all" });
 
-  if (loading || updating) {
+  if (loading || updating || sending) {
     return <Loading />;
   }
 
   const signUpHandler = async (e) => {
+    const users = {
+      email: e?.email,
+      name: e?.name,
+      linkedIn: e?.linkedIn || "No info",
+      gitHub: e?.gitHub || "No info",
+    };
     // console.log(e);
     if (e.password !== e.confirmPassword) {
       toast("password does not match!");
@@ -40,6 +47,17 @@ const Signup = () => {
     await createUserWithEmailAndPassword(e.email, e.password);
     await updateProfile({ displayName: e.name });
     await sendEmailVerification();
+    //
+
+    fetch("https://langel-server-production.up.railway.app/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    }).then((res) => res.json());
+    //
+
     signOut(auth);
     toast.success("Signup Successful! Please Confirm Email.");
     reset();
@@ -47,6 +65,7 @@ const Signup = () => {
   };
   // password match
   const password = watch("password");
+
   return (
     <div className="form-control d-flex justify-center items-center my-20">
       <div className="card w-96 bg-base-100 shadow-2xl image-full">
