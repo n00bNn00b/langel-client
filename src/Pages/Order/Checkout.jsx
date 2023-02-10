@@ -38,6 +38,7 @@ const Checkout = () => {
       address: data.address,
       productName: product.name,
       price: product.price,
+      totalPrice: parseFloat(Number(product.price * data.minorder)).toFixed(2),
     };
     if (data.minorder >= 100) {
       fetch("https://langel-server-production.up.railway.app/order", {
@@ -66,16 +67,15 @@ const Checkout = () => {
           <div className="card-body">
             <h2 className="card-title">{product.name}</h2>
             <p>
-              <span>Available Quantity: </span>
+              <span className="font-bold">Available Quantity: </span>
               {product.quantity}{" "}
             </p>
             <p>
-              <span>Minimum Order(package): </span>
+              <span className="font-bold">Minimum Order(package): </span>
               {product.minOrder}{" "}
             </p>
             <p>
-              <span>Price: </span>
-              {product.price}{" "}
+              <span className="font-bold">Price: </span>${product.price}{" "}
             </p>
 
             <form onSubmit={handleSubmit(checkoutHandler)}>

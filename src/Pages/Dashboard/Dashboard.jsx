@@ -43,7 +43,11 @@ const Dashboard = () => {
               <td>{product.order}</td>
               <td>{product.address}</td>
               <td>$ {product.price}</td>
-              <td>{parseFloat(product.order * product.price).toFixed(2)}</td>
+              <td>
+                $
+                {parseFloat(product.order * product.price).toFixed(2) ||
+                  product.totalPrice}
+              </td>
               <td>
                 <button
                   className="btn btn-sm
