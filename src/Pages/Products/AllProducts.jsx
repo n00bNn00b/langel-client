@@ -17,7 +17,7 @@ const AllProducts = () => {
   }, []);
 
   return (
-    <div className="m-10">
+    <div className="my-20">
       <h2 className="text-center text-3xl font-bold text-secondary">
         Products We Supply all over the World
       </h2>
