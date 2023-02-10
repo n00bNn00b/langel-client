@@ -36,13 +36,29 @@ const Profile = () => {
         </p>
         <p>
           <span className="font-bold">GitHub:</span>{" "}
-          {socialUser?.gitHub ? socialUser?.gitHub : " Name not updated yet"}{" "}
+          <a
+            href={
+              socialUser?.gitHub ? socialUser?.gitHub : " Link not updated yet"
+            }
+            className="text-blue-500"
+          >
+            {socialUser?.gitHub ? socialUser?.gitHub : " Link not updated yet"}
+          </a>
         </p>
         <p>
           <span className="font-bold">LinkedIn:</span>{" "}
-          {socialUser?.linkedIn
-            ? socialUser?.linkedIn
-            : " Name not updated yet"}{" "}
+          <a
+            href={
+              socialUser?.linkedIn
+                ? socialUser?.linkedIn
+                : " Link not updated yet"
+            }
+            className="text-blue-500"
+          >
+            {socialUser?.linkedIn
+              ? socialUser?.linkedIn
+              : " Link not updated yet"}
+          </a>
         </p>
         <Link to="/updateProfile" className="btn">
           Edit Profile

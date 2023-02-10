@@ -34,7 +34,7 @@ const Checkout = () => {
     const orders = {
       name: user?.displayName,
       email: user?.email,
-      order: data.minorder,
+      order: parseInt(data.minorder),
       address: data.address,
       productName: product.name,
       price: product.price,
