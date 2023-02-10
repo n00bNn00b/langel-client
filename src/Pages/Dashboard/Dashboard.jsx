@@ -36,7 +36,7 @@ const Dashboard = () => {
               <td>
                 {product.name}
                 <br />
-                <span className="badge badge-ghost badge-sm">
+                <span className="badge badge-success badge-sm">
                   {product.email}
                 </span>
               </td>
