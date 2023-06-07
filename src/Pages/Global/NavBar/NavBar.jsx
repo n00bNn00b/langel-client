@@ -82,7 +82,7 @@ const NavBar = () => {
           </ul>
         </div>
         <Link to="/home" className="btn btn-ghost normal-case text-xl">
-          Langel & Co.
+          DigInventory
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

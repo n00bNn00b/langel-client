@@ -70,10 +70,7 @@ const Signup = () => {
     <div className="form-control d-flex justify-center items-center my-20">
       <div className="card w-96 bg-base-100 shadow-2xl image-full">
         <figure>
-          <img
-            src="https://i.ibb.co/GWjhvrX/lagel-logo.png?w=400&h=225"
-            alt="Langel"
-          />
+          <img src="https://i.ibb.co/PNmzYRX/diginventory.png" alt="Langel" />
         </figure>
         <div className="card-body">
           <h2 className="text-center text-secondary font-bold text-3xl">

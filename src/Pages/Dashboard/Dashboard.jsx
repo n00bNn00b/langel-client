@@ -1,14 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [products, setProducts] = useState([]);
+  const [delivered, setDelivered] = useState(false);
   useEffect(() => {
     axios
       .get("https://langel-server-production.up.railway.app/orders")
       .then((res) => setProducts(res.data));
   }, []);
-  console.log(products);
+  const deliverHandler = () => {
+    toast.success("Delivery is on the way!");
+    setDelivered(!delivered);
+  };
   return (
     <div className="overflow-x-auto w-full my-20">
       <table className="table w-full">
@@ -53,6 +58,7 @@ const Dashboard = () => {
                   className="btn btn-sm
                  btn-pri
               "
+                  onClick={deliverHandler}
                 >
                   Deliver
                 </button>

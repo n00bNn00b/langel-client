@@ -5,7 +5,7 @@ const UsersInfo = ({ user, refetch, index }) => {
   const { email, name, role } = user;
   const makeAdmin = () => {
     fetch(
-      `https://langel-server-production.up.railway.app/user/admin/${email}`,
+      `https://industrious-rabbits-production.up.railway.app/user/admin/${email}`,
       {
         method: "PUT",
         headers: {

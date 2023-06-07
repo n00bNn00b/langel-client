@@ -17,17 +17,20 @@ import MyOrders from "./Pages/Dashboard/MyOrders";
 import Users from "./Pages/Dashboard/Users";
 import RequireAdmin from "./Pages/Dashboard/RequireAdmin";
 import NotFound from "./Pages/NotFound";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "./firebase.init";
 
 function App() {
+  const [user] = useAuthState(auth);
   return (
     <div>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        {!user && <Route path="/login" element={<Login />} />}
         <Route path="/products" element={<AllProducts />} />
-        <Route path="/signup" element={<Signup />} />
+        {!user && <Route path="/signup" element={<Signup />} />}
         <Route
           path="/profile"
           element={
@@ -84,12 +87,22 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route
+        {/* <Route
           path="/users"
           element={
             <RequireAdmin>
               <Users />
             </RequireAdmin>
+          }
+        /> */}
+        <Route
+          path="/users"
+          element={
+            <RequireAuth>
+              <RequireAdmin>
+                <Users />
+              </RequireAdmin>
+            </RequireAuth>
           }
         />
         <Route path="*" element={<NotFound />} />
